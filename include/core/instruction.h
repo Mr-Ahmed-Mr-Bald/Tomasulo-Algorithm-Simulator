@@ -31,7 +31,7 @@ class Instruction {
   // Constructor
   Instruction(int index, Opcode opcode, int dest, int src1, int src2, const std::string& raw_instruction);
 
-  // Gettters
+  // Getters
   int get_index() const;
   std::string get_raw_instruction() const;
   Opcode get_opcode() const;
