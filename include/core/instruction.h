@@ -32,18 +32,18 @@ class Instruction {
   Instruction(int index, Opcode opcode, int dest, int src1, int src2, const std::string& raw_instruction);
 
   // Gettters
-  int getIndex() const;
-  std::string getRawInstruction() const;
-  Opcode getOpcode() const;
-  int getDest() const;
-  int getSrc1() const;
-  int getSrc2() const;
-  StageState getStageState() const;
-  InstructionTiming getTiming() const;
+  int get_index() const;
+  std::string get_raw_instruction() const;
+  Opcode get_opcode() const;
+  int get_dest() const;
+  int get_src1() const;
+  int get_src2() const;
+  StageState get_stage_state() const;
+  InstructionTiming get_timing() const;
 
   // Setters
-  void setStageState(StageState);
-  void setTiming(InstructionTiming);
+  void set_stage_state(StageState state);
+  void set_timing(StageState state, int cycle);
 };
 
 #endif // INSTRUCTION_H

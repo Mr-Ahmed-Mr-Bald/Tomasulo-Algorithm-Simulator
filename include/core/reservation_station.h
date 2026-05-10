@@ -92,16 +92,16 @@ class ReservationStation {
   // Methods
   void clear();
   void allocate(Opcode op, int instrId, int latency);
-  bool isFree() const;
-  bool operandsReady() const;
-  bool canStartExecution() const;
-  void startExecution();
+  bool is_free() const;
+  bool operands_ready() const;
+  bool canStart_execution() const;
+  void start_execution();
   void tick();
   bool done() const;
-  void setVj(uint16_t v);
-  void setVk(uint16_t v);
-  void setQj(int tag);
-  void setQk(int tag);
+  void set_vj(uint16_t v);
+  void set_vk(uint16_t v);
+  void set_qj(int tag);
+  void set_qk(int tag);
 };
 
 #endif // RESERVATION_STATION_H

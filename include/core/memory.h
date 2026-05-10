@@ -18,7 +18,7 @@ class Memory {
   uint16_t load(int address) const;
   void store(int address, uint16_t value);
   void preload(int address, uint16_t value);
-  bool isValidAddress(int address) const;
+  bool is_valid_address(int address) const;
 };
 
 #endif // MEMORY_H

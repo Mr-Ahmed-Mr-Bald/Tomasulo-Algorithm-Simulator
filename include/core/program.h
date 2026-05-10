@@ -9,15 +9,15 @@
 // Class representing a program consisting of a sequence of instructions and labels
 class Program {
   // Properties
-  int startAddress;
+  int start_address;
   std::vector<Instruction> instructions;
 
   public:
   // Constructor
-  Program(int startAddress) : startAddress(startAddress) {}
+  Program(int start_address) : start_address(start_address) {}
 
   // Methods
-  void addInstruction(const Instruction& inst);
+  void add_instruction(const Instruction& inst);
   Instruction& get(int index);
   const Instruction& get(int index) const;
   int size() const;
