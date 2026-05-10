@@ -5,6 +5,7 @@
 #include "../core/enums.h"
 #include <string>
 #include <vector>
+#include <cstdint>
 
 class InputManager {
   public:
