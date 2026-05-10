@@ -1,4 +1,4 @@
-#include "instruction.h"
+#include "../../include/core/instruction.h"
 
 int Instruction::get_index() const {
     return index;

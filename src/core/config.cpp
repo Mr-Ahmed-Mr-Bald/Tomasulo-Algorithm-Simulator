@@ -1,4 +1,4 @@
-#include "config.h"
+#include "../../include/core/config.h"
 
 int get_reservation_station_size(int addr){
     if(addr < NUM_REGS && addr > 0)
