@@ -14,6 +14,8 @@ class RegisterFile {
   std::array<bool, NUM_REGS> ready;
   std::array<int, NUM_REGS> producer_tag; // index of reservation station producing this register, or -1
 
+  bool is_valid_address(int reg) const;
+
   public:
   // Constructor
   RegisterFile();
