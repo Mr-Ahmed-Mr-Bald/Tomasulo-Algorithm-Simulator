@@ -5,6 +5,7 @@
 #include "config.h"
 #include "reservation_station.h"
 #include <unordered_map>
+#include <vector>
 
 
 // Class representing the manager of all reservation stations
