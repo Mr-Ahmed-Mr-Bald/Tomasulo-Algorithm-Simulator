@@ -11,3 +11,10 @@ void Memory::store(int address, uint16_t value){
         data[address] = value;
 }
 
+void Memory::preload(int address, uint16_t value){
+
+}
+
+bool Memory::is_valid_address(int address) const{
+    
+}
