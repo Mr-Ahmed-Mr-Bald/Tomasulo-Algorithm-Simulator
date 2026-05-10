@@ -14,6 +14,8 @@ class Stat {
 
   public:
   // Methods
+  void reset();
+  void record_instruction_started();
   void record_instruction_completed();
   void record_branch();
   void record_misprediction();
