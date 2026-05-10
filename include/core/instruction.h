@@ -3,7 +3,7 @@
 
 // Required headers
 #include "enums.h"
-#include "string"
+#include <string>
 
 class InstructionTiming {
   public:
@@ -29,7 +29,7 @@ class Instruction {
   public:
 
   // Constructor
-  Instruction(int, Opcode, int, int, int, const std::string&);
+  Instruction(int index, Opcode opcode, int dest, int src1, int src2, const std::string& raw_instruction);
 
   // Gettters
   int getIndex() const;
@@ -40,7 +40,7 @@ class Instruction {
   int getSrc2() const;
   StageState getStageState() const;
   InstructionTiming getTiming() const;
-  
+
   // Setters
   void setStageState(StageState);
   void setTiming(InstructionTiming);
