@@ -4,6 +4,7 @@
 // Required headers
 #include "config.h"
 #include <vector>
+#include <cstdint>
 
 // Class representing the memory of the system
 class Memory {
