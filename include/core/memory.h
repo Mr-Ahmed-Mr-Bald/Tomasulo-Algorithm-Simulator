@@ -9,17 +9,21 @@
 // Class representing the memory of the system
 class Memory {
   // Properties
+  //initialize the memory directly with the fixed mem size
   std::vector<uint16_t> data;
+  
+  bool is_valid_address(int address) const;
 
   public:
   // Constructor
-  Memory(int size = MEM_SIZE);
+  Memory() : data(MEM_SIZE){
+  };
+  
 
   // Methods
   uint16_t load(int address) const;
   void store(int address, uint16_t value);
   void preload(int address, uint16_t value);
-  bool is_valid_address(int address) const;
 };
 
 #endif // MEMORY_H

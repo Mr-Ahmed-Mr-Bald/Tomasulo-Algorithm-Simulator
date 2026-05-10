@@ -12,9 +12,9 @@ void Memory::store(int address, uint16_t value){
 }
 
 void Memory::preload(int address, uint16_t value){
-
+    store(address, value);
 }
 
 bool Memory::is_valid_address(int address) const{
-    
+    return (address >= 0 ) && (address < data.capacity());
 }
