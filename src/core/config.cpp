@@ -1,9 +1,9 @@
 #include "../../include/core/config.h"
 
 //get number of reservation stations for functioning unit at given address 
-int get_reservation_station_size(int addr){
+int get_reservation_station_num(int addr){
     if(addr < NUM_REGS && addr > 0)
-        return reservation_station_size[addr];
+        return reservation_station_num[addr];
     return -1;
 }
 
