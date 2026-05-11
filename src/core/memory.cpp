@@ -1,7 +1,7 @@
 #include "../../include/core/memory.h"
 
 uint16_t Memory::load(int address){
-    if(is_valid_address(address)) //should we check against size, capacity, or mem_size
+    if(is_valid_address(address)) 
         return data[address];
     return -1;
 }
