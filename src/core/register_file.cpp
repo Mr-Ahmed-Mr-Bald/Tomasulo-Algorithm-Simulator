@@ -43,5 +43,5 @@ void RegisterFile::set_producer(int reg, int stationId) {
 //clears the producer tag (set to -1)
 void RegisterFile::clear_producer(int reg, int stationId) {
     if(is_valid_address(reg))
-        producer_tag[reg] = -1;
+        producer_tag[reg] = 0;
 }

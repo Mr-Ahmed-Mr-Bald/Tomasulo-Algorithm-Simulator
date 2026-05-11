@@ -12,7 +12,7 @@ class RegisterFile {
   // Properties
   std::array<uint16_t, NUM_REGS> value;
   std::array<bool, NUM_REGS> ready;
-  std::array<int, NUM_REGS> producer_tag; // index of reservation station producing this register, or -1
+  std::array<int, NUM_REGS> producer_tag; // index of reservation station producing this register, or 0
 
   bool is_valid_address(int reg) const;
 
