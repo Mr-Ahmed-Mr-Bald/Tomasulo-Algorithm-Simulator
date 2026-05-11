@@ -37,11 +37,17 @@ int RegisterFile::get_producer(int reg) const{
 //sets the producer tag
 void RegisterFile::set_producer(int reg, int stationId) {
     if(is_valid_address(reg))
-        producer_tag[reg] = stationId;
+        {
+            producer_tag[reg] = stationId;
+            ready[reg] = true;
+        }
 }
 
 //clears the producer tag (set to -1)
 void RegisterFile::clear_producer(int reg, int stationId) {
     if(is_valid_address(reg))
-        producer_tag[reg] = 0;
+        {
+            producer_tag[reg] = 0;
+            ready[reg] = true;
+        }
 }

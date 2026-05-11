@@ -21,9 +21,9 @@ class StationManager {
   // Methods
   ReservationStation* find_free(RSClass type);
   ReservationStation* get_by_id(int id);
-  std::vector<ReservationStation*> get_station_of_type(RSClass type);
+  std::vector<ReservationStation*> get_stations_of_type(RSClass type);
   void reset();
-  std::vector<ReservationStation*> ready_to_write_back() const;
+  std::vector<ReservationStation*> ready_to_write_back();
 };
 
 #endif // STATION_MANAGER_H
