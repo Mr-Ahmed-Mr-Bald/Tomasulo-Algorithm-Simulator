@@ -6,7 +6,7 @@ bool RegisterFile::is_valid_address (int reg) const
     return (reg>=0 && reg < NUM_REGS); 
 }
 
-//reads the value at the specified register
+//reads the value at the specified register, returns 0 if invalid address
 uint16_t RegisterFile::read(int reg) const{
     if(is_valid_address(reg))
         return value[reg];
@@ -30,7 +30,7 @@ bool RegisterFile::is_ready(int reg) const{
 int RegisterFile::get_producer(int reg) const{
     if(is_valid_address(reg))
         return producer_tag[reg];
-    return -1;
+    return 0;
 }
 
 
