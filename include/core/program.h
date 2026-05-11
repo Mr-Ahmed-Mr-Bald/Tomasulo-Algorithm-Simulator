@@ -18,8 +18,8 @@ class Program {
 
   // Methods
   void add_instruction(const Instruction& inst);
-  Instruction& get(int index);
   const Instruction& get(int index) const;
+  //const Instruction& get(int index) const;
   int size() const;
   bool empty() const;
 
