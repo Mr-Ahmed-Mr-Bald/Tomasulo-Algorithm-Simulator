@@ -16,6 +16,10 @@ void ReservationStation::allocate(Opcode op, int instrId, int latency){
     totalLatency = latency; 
 }
 
+RSClass ReservationStation::station_type() const{
+    return type;
+}
+
 bool ReservationStation::is_free() const{
     return !busy;
 }
@@ -46,6 +50,10 @@ void ReservationStation::set_qk(int tag){
 
 void ReservationStation::setA(int value){
     A = value;
+}
+
+int ReservationStation::get_id() const{
+    return id;
 }
 
 //enum class Opcode { LOAD, STORE, BEQ, CALL, RET, ADD, SUB, AND, MUL };

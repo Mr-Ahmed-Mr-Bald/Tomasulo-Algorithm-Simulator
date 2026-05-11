@@ -60,6 +60,7 @@ class ReservationStation {
   // Properties
   int id;
   RSClass type;
+  
   bool busy;
   Opcode op;
   int instructionId;
@@ -93,6 +94,9 @@ class ReservationStation {
   // Methods
   void clear();
   void allocate(Opcode op, int instrId, int latency);
+  
+  int get_id() const;
+  RSClass station_type() const;
   bool is_free() const;
   bool operands_ready() const;
   bool canStart_execution() const;

@@ -20,6 +20,7 @@ class Program {
   void add_instruction(const Instruction& inst);
   Instruction& get(int index);
   //const Instruction& get(int index) const;
+  int get_start_address() const;
   int size() const;
   bool empty() const;
 
