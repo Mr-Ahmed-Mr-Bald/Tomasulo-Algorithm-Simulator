@@ -10,20 +10,15 @@
 class Memory {
   // Properties
   //initialize the memory directly with the fixed mem size
-  std::vector<uint16_t> data;
+  static std::vector<uint16_t> data;
   
-  bool is_valid_address(int address) const;
+  static bool is_valid_address(int address);
 
   public:
-  // Constructor
-  Memory() : data(MEM_SIZE){
-  };
-  
-
   // Methods
-  uint16_t load(int address) const;
-  void store(int address, uint16_t value);
-  void preload(int address, uint16_t value);
+  static uint16_t load(int address);
+  static void store(int address, uint16_t value);
+  static void preload(int address, uint16_t value);
 };
 
 #endif // MEMORY_H
