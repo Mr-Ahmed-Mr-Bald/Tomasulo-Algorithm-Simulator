@@ -14,9 +14,9 @@ class Memory {
   
   bool is_valid_address(int address);
 
+  public:
   Memory() : data(MEM_SIZE){}
 
-  public:
   // Methods
   uint16_t load(int address);
   void store(int address, uint16_t value);
