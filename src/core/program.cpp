@@ -4,7 +4,7 @@ void Program::add_instruction(const Instruction& inst){
     instructions.push_back(inst);
 }
 
-const Instruction& Program::get(int index) const{
+Instruction& Program::get(int index){
     return instructions[index];
 }
 
