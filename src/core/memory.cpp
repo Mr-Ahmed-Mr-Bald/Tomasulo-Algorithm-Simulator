@@ -1,7 +1,5 @@
 #include "../../include/core/memory.h"
 
-std::vector<uint16_t> Memory::data(MEM_SIZE);
-
 uint16_t Memory::load(int address){
     if(is_valid_address(address)) //should we check against size, capacity, or mem_size
         return data[address];
