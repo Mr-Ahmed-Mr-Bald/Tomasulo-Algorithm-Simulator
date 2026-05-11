@@ -38,7 +38,7 @@ void IssueStage::run(){
     ReservationStation rs = *state.stations.find_free(inst_class);
     int latency = get_latency(inst_class);
 
-    if(rs.station_type() == RSClass::Empty); //if empty then we have to halt and return
+    if(rs.station_type() == RSClass::Empty); //TODO: if empty then we have to halt and return
 
     rs.allocate(inst.get_opcode(), instructionId, latency);
     
@@ -56,6 +56,8 @@ void IssueStage::run(){
         rs.set_qk(rs2);
     else
         rs.set_vk(state.registers.read(rs2));
+
+    //TODO: if we are gonna wait for a producer, we need to check in every cycle if result is updated
 
     //mark the destination register to be produced
     state.registers.set_producer(rd, rs.get_id()); 
