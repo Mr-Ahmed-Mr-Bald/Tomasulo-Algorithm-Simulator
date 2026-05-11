@@ -74,6 +74,7 @@ class ReservationStation {
 
   // Address / special field
   int A;
+  bool branch;
 
   // Execution state
   bool started;
@@ -102,6 +103,8 @@ class ReservationStation {
   void set_vk(uint16_t v);
   void set_qj(int tag);
   void set_qk(int tag);
+  void setA(int value);
+
 };
 
 #endif // RESERVATION_STATION_H
