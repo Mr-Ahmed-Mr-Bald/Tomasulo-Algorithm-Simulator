@@ -1,5 +1,8 @@
 #include "../../include/core/instruction.h"
 
+Instruction::Instruction(int index, Opcode opcode, int dest, int src1, int src2, const std::string& raw_instruction) :
+        index(index), dest(dest), src1(src1), src2(src2), raw_instruction(raw_instruction){}
+
 //instruction index
 int Instruction::get_index() const {
     return index;
