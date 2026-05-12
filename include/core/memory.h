@@ -2,7 +2,7 @@
 #define MEMORY_H
 
 // Required headers
-#include "config.h"
+#include "core/config.h"
 #include <vector>
 #include <cstdint>
 
@@ -15,7 +15,7 @@ class Memory {
   bool is_valid_address(int address);
 
   public:
-  Memory() : data(MEM_SIZE){}
+  Memory() : data(Config::MEM_SIZE) {}
 
   // Methods
   uint16_t load(int address);

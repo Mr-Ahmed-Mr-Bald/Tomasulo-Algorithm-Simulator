@@ -56,12 +56,12 @@ void Instruction::set_stage_state(StageState state){
 
 // Set timing of a particular state to a particular value (cycle)
 void Instruction::set_timing(StageState state, int cycle){
-    if(state == StageState::Issued)
+    if (state == StageState::Issued)
         timing.issued = cycle;
-    else if(state == StageState::Executing)
+    else if (state == StageState::Executing)
         timing.executing = cycle;
-    else if(state == StageState::Finished)
+    else if (state == StageState::Finished)
         timing.finished = cycle;
-    else if(state == StageState::Written)
+    else if (state == StageState::Written)
         timing.written = cycle;
 }

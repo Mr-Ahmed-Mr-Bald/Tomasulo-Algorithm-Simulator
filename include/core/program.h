@@ -5,6 +5,7 @@
 #include "instruction.h"
 #include <vector>
 #include <unordered_map>
+#include <stdexcept>
 
 // Class representing a program consisting of a sequence of instructions and labels
 class Program {
@@ -18,8 +19,7 @@ class Program {
 
   // Methods
   void add_instruction(const Instruction& inst);
-  const Instruction& get(int index) const;
-  //const Instruction& get(int index) const;
+  Instruction get(int index) const;
   int size() const;
   bool empty() const;
 
