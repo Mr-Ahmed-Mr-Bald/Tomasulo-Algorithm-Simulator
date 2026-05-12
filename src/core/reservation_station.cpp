@@ -1,5 +1,5 @@
-#include "../../include/core/reservation_station.h"
-#include "../../include/core/memory.h"
+#include "core/reservation_station.h"
+#include "core/memory.h"
 
 ReservationStation::ReservationStation(int id, RSClass type) :
     id(id), type(type){

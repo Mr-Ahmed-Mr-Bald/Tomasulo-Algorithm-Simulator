@@ -1,15 +1,19 @@
-#include "../../include/core/config.h"
+#include "core/config.h"
 
-//get number of reservation stations for functioning unit at given address 
-int get_reservation_station_num(int addr){
-    if(addr < 7 && addr >= 0)
-        return reservation_station_num[addr];
-    return -1;
-}
-
-//get the number of execution cycles for functioning unit at given address
-int get_execution_cycles(int address){
-    if(address < 7 && address >= 0)
+namespace Config {
+    
+    // Get number of reservation stations for functioning unit at given address 
+    int get_reservation_station_num(int address) {
+        if (address < 0 || address >= NUM_FUNCTIONAL_UNITS)
+            throw std::out_of_range("Address out of range");
+        return reservation_station_num[address];
+    }
+    
+    // Get the number of execution cycles for functioning unit at given address
+    int get_execution_cycles(int address){
+        if (address < 0 || address >= NUM_FUNCTIONAL_UNITS)
+            throw std::out_of_range("Address out of range");
         return execution_cycles[address];
-    return -1;
+    }
+
 }

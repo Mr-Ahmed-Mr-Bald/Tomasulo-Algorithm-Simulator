@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\AUC\Semester Five\Computer Architecture\Project II\src\core\app.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\AUC\Semester Five\Computer Architecture\Project II\src\core\config.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\AUC\Semester Five\Computer Architecture\Project II\src\core\instruction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\AUC\Semester Five\Computer Architecture\Project II\src\core\memory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\AUC\Semester Five\Computer Architecture\Project II\src\core\program.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\AUC\Semester Five\Computer Architecture\Project II\src\core\register_file.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\AUC\Semester Five\Computer Architecture\Project II\src\core\reservation_station.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\AUC\Semester Five\Computer Architecture\Project II\src\core\simulator_state.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\AUC\Semester Five\Computer Architecture\Project II\src\core\station_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\AUC\Semester Five\Computer Architecture\Project II\src\core\stats.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\AUC\Semester Five\Computer Architecture\Project II\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{2CD0FABB-6901-35C0-B3C5-0C58DF4C7DC3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
