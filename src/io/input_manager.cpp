@@ -127,3 +127,43 @@ std::vector<std::pair<int, uint16_t>> InputManager::read_initial_memory_data() {
 
     return memory_data;
 }
+
+/// @brief Prompts user to input functional unit sizes or keep defaults
+/// Order: Load, Store, Branch, Call/Ret, Add/Sub, And, Mul
+/// @return vector of functional unit counts
+std::vector<int> InputManager::read_functional_unit_sizes() {
+    std::cout << "\nEnter number of functional units for each instruction class:\n";
+    std::cout << "Order:\n";
+    std::cout << "  Load  Store  Branch  Call/Ret  Add/Sub  And  Mul\n";
+    std::cout << "Example:\n";
+    std::cout << "  2 3 3 4 1 3 2\n";
+    std::cout << "Or type 'default' to keep default configuration\n";
+    std::cout << "> ";
+
+    std::string line;
+    std::getline(std::cin, line);
+
+    if (line == "default") {
+        return std::vector<int>({ 2, 2, 2, 1, 4, 2, 1 }); // empty vector signals default
+    }
+
+    std::stringstream ss(line);
+    std::vector<int> values;
+    int x;
+
+    while (ss >> x) {
+        if (x <= 0) {
+            throw std::runtime_error("Functional unit counts must be positive");
+        }
+        values.push_back(x);
+    }
+
+    if (values.size() != Config::NUM_FUNCTIONAL_UNITS) {
+        throw std::runtime_error(
+            "Expected " + std::to_string(Config::NUM_FUNCTIONAL_UNITS) +
+            " values for functional units"
+        );
+    }
+
+    return values;
+}

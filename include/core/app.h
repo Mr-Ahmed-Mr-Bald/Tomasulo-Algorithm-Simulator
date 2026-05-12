@@ -26,6 +26,9 @@ class App {
   Program gather_program();
   std::vector<std::pair<int, uint16_t>> gather_data();
   void display_results(const Program& program, const SimulatorState& state);
+  
+  void configure_functional_units(); 
+
 };
 
 #endif // APP_H

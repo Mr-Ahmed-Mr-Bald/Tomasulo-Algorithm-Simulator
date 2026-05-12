@@ -39,3 +39,22 @@ Program App::gather_program() {
 std::vector<std::pair<int, uint16_t>> App::gather_data() {
     return input_manager.read_initial_memory_data();
 }
+
+/// @brief Displays the final results of the simulation including instruction table, stats, and final report
+void App::configure_functional_units() {
+    std::vector<int> user_units =
+        input_manager.read_functional_unit_sizes();
+
+    // Empty vector => keep defaults
+    if (user_units.empty()) {
+        std::cout << "Using default functional unit configuration.\n";
+        return;
+    }
+
+    // Override defaults
+    for (int i = 0; i < Config::NUM_FUNCTIONAL_UNITS; ++i) {
+        Config::reservation_station_num[i] = user_units[i];
+    }
+
+    std::cout << "Custom functional unit configuration applied.\n";
+}
