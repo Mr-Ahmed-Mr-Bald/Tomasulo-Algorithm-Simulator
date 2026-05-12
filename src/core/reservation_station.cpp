@@ -1,19 +1,17 @@
-#include "../../include/core/reservation_station.h"
-#include "../../include/core/memory.h"
+#include "core/reservation_station.h"
+#include "core/memory.h"
 
-ReservationStation::ReservationStation(int id, RSClass type) :
-    id(id), type(type){
-        started = 0;
-        finished = 0;
-        remainingCycles = 0;
-        totalLatency = 0;
-    }
+// Constructor
+ReservationStation::ReservationStation(Enums::RSClass type) : type(type) {
+    started = 0;
+    finished = 0;
+    remaining_cycles = 0;
+}
 
-void ReservationStation::allocate(Opcode op, int instrId, int latency){ 
+void ReservationStation::allocate(Enums::Opcode op, int instruction_id, int latency){ 
     busy = true;
     this->op = op;
-    this->instructionId = instrId;
-    totalLatency = latency; 
+    this->instruction_id = instruction_id;
 }
 
 RSClass ReservationStation::station_type() const{
@@ -25,7 +23,7 @@ bool ReservationStation::is_free() const{
 }
 
 bool ReservationStation::operands_ready() const{
-    return Qj == 0 && Qk == 0;
+    return qj == 0 && qk == 0;
 }
 
 bool ReservationStation::canStart_execution() const{
@@ -33,19 +31,19 @@ bool ReservationStation::canStart_execution() const{
 }
 
 void ReservationStation::set_vj(uint16_t v){
-    Vj = v;
+    vj = v;
 }
 
 void ReservationStation::set_vk(uint16_t v){
-    Vk = v;
+    vk = v;
 }
 
 void ReservationStation::set_qj(int tag){
-    Qj = tag;
+    qj = tag;
 }
 
 void ReservationStation::set_qk(int tag){
-    Qk = tag;
+    qk = tag;
 }
 
 void ReservationStation::setA(int value){
@@ -67,17 +65,17 @@ void ReservationStation::start_execution(){
 
     started = true;
 
-    if(op == Opcode::LOAD){
-        result = Memory::load(Vj);
-        A += Vj; //by standard, address is stored in Vj
+    if(op == Enums::Opcode::LOAD){
+        result = Memory::load(vj);
+        A += vj; //by standard, address is stored in vj
     }
 
     else if(op == Opcode::STORE){
-        Memory::store(A+Vj, Vk); //address, value
+        Memory::store(A+vj, vk); //address, value
     }
 
     else if(op == Opcode::BEQ){
-        if(Vj == Vk);
+        if(vj == vk);
             //requires program counter
     }
 
@@ -90,22 +88,22 @@ void ReservationStation::start_execution(){
     }
 
     else if(op == Opcode::ADD){
-        result = Vj + Vk;
+        result = vj + vk;
         //where does it store?
     }
 
     else if(op == Opcode::SUB){
-        result = Vj - Vk;
+        result = vj - vk;
         //where does it store?
     }
     
     else if(op == Opcode::AND){
-        result = Vj & Vk;
+        result = vj & vk;
         //where does it store?
     }
 
     else if(op == Opcode::MUL){
-        result = Vj * Vk;
+        result = vj * vk;
         //where does it store?
     }
 
