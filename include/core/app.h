@@ -10,8 +10,9 @@
 #include "../io/input_manager.h"
 #include "../parser/parser.h"
 
+
 // Class representing the main application
-class App {
+class App { 
   // Properties
   InputManager input_manager;
   Parser parser;
