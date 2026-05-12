@@ -101,7 +101,6 @@ bool IssueStage::run(
             vj = static_cast<uint16_t>(dynamic_instruction->get_index() + 1);
             A = dynamic_instruction->get_src2();
             state.registers.set_producer(dynamic_instruction->get_dest(), station->get_id());
-            control.pending_jump_id = dynamic_id;
             break;
 
         case Enums::Opcode::RET:
@@ -124,6 +123,12 @@ bool IssueStage::run(
     instruction_pool.push_back(std::move(dynamic_instruction));
     issue_queue.push_back(instruction_pool.back().get());
     stats.record_instruction_started();
-    state.advance_pc();
+
+    if (issue_queue.back()->get_opcode() == Enums::Opcode::CALL) {
+        state.jump_to_address(issue_queue.back()->get_src2());
+    } else {
+        state.advance_pc();
+    }
+
     return true;
 }

@@ -14,7 +14,7 @@ bool writes_to_register(Enums::Opcode opcode) {
 }
 
 /// @brief Broadcasts a produced value to waiting stations and matching register-file entries
-void broadcast_result(SimulatorState& state, int producer_station_id, uint16_t value) {
+void broadcast_result(SimulatorState& state, int producer_station_id, int destination_register, uint16_t value) {
     for (ReservationStation* station : state.stations.get_all_stations()) {
         if (station->is_free())
             continue;
@@ -30,9 +30,12 @@ void broadcast_result(SimulatorState& state, int producer_station_id, uint16_t v
         }
     }
 
+    if (destination_register >= 0) {
+        state.registers.write(destination_register, value);
+    }
+
     for (int reg = 0; reg < Config::NUM_REGS; ++reg) {
         if (state.registers.get_producer(reg) == producer_station_id) {
-            state.registers.write(reg, value);
             state.registers.clear_producer(reg);
         }
     }
@@ -70,7 +73,7 @@ void WriteBackStage::run(
     }
 
     if (writes_to_register(station->get_op())) {
-        broadcast_result(state, station->get_id(), station->get_result());
+        broadcast_result(state, station->get_id(), instruction->get_dest(), station->get_result());
     }
 
     if (station->get_op() == Enums::Opcode::BEQ && station->branch_taken()) {
@@ -82,7 +85,7 @@ void WriteBackStage::run(
         state.jump_to_address(control.next_pc);
     }
 
-    if (station->get_op() == Enums::Opcode::CALL || station->get_op() == Enums::Opcode::RET) {
+    if (station->get_op() == Enums::Opcode::RET) {
         control.pc_changed = true;
         control.next_pc = station->get_result_address();
         state.jump_to_address(control.next_pc);

@@ -1,31 +1,51 @@
 #include "io/input_manager.h"
 #include <filesystem>
+#include <limits>
 #include <iostream>
 #include <fstream>
 #include <sstream>
 
 InputManager::InputManager() {}
 
+namespace {
+/// @brief Clears the current input line after formatted extraction
+void discard_line() {
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
+}
+
 
 /// @brief Chooses the input mode for reading assembly instrucitons
 /// @return the input mode as an ENUM value 
 Enums::InputMode InputManager::choose_input_mode() {
-    int choice;
+    while (true) {
+        int choice;
 
-    std::cout << "Choose input mode:\n";
-    std::cout << "1. Enter assembly instructions line by line or as one block\n";
-    std::cout << "2. Enter file name\n";
-    std::cout << "Enter choice: (enter 1 or 2)";
+        std::cout << "Choose input mode:\n";
+        std::cout << "1. Enter assembly instructions line by line or as one block\n";
+        std::cout << "2. Enter file name\n";
+        std::cout << "Enter choice: (enter 1 or 2)";
 
-    std::cin >> choice;
-    std::cin.ignore();  // clear newline
+        if (!(std::cin >> choice)) {
+            if (std::cin.eof()) {
+                throw std::runtime_error("Input ended while reading input mode");
+            }
 
-    switch (choice) {
-        case 1: return Enums::InputMode::MANUAL;
-        case 2: return Enums::InputMode::FILE;
-        default:
+            std::cin.clear();
+            discard_line();
             std::cerr << "Invalid input mode.\n";
-            return choose_input_mode();
+            continue;
+        }
+
+        discard_line();
+
+        switch (choice) {
+            case 1: return Enums::InputMode::MANUAL;
+            case 2: return Enums::InputMode::FILE;
+            default:
+                std::cerr << "Invalid input mode.\n";
+                break;
+        }
     }
 }
 
@@ -39,7 +59,10 @@ std::vector<std::string> InputManager::read_manual() {
     std::cout << "Enter RISCV assembly instructions (type 'done' to finish):\n";
 
     while (true) {
-        std::getline(std::cin, line);
+        if (!std::getline(std::cin, line)) {
+            throw std::runtime_error("Input ended while reading assembly instructions");
+        }
+
         if (line == "done") break;
         instructions.push_back(line);
     }
@@ -82,8 +105,7 @@ std::vector<std::string> InputManager::read_from_file(const std::string& path) {
     std::string line;
 
     if (!file.is_open()) {
-        std::cerr << "Failed to open file: " << path << "\n";
-        return instructions;
+        throw std::runtime_error("Failed to open file: " + path);
     }
 
     while (std::getline(file, line)) {
@@ -99,11 +121,24 @@ std::vector<std::string> InputManager::read_from_file(const std::string& path) {
 /// @brief Reads the start address in the program as the line number of the first instruction to execute
 /// @return Integer representing the start address
 int InputManager::read_start_address() {
-    int address;
-    std::cout << "Enter start address: ";
-    std::cin >> address;
-    std::cin.ignore();
-    return address;
+    while (true) {
+        int address;
+        std::cout << "Enter start address: ";
+
+        if (!(std::cin >> address)) {
+            if (std::cin.eof()) {
+                throw std::runtime_error("Input ended while reading start address");
+            }
+
+            std::cin.clear();
+            discard_line();
+            std::cerr << "Invalid start address. Please enter an integer.\n";
+            continue;
+        }
+
+        discard_line();
+        return address;
+    }
 }
 
 
@@ -117,8 +152,17 @@ std::vector<std::pair<int, uint16_t>> InputManager::read_initial_memory_data() {
     std::cout << "Type 'done' to finish:\n";
 
     while (true) {
-        std::getline(std::cin, line);
+        if (!std::getline(std::cin, line)) {
+            if (std::cin.eof()) {
+                throw std::runtime_error("Input ended while reading initial memory data");
+            }
+
+            std::cin.clear();
+            throw std::runtime_error("Failed while reading initial memory data");
+        }
+
         if (line == "done") break;
+        if (line.empty()) continue;
 
         std::stringstream ss(line);
         int address;
