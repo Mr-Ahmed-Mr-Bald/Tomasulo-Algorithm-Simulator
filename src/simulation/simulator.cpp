@@ -1,19 +1,25 @@
-#include "../../include/simulation/simulator.h"
+#include "simulation/simulator.h"
 
-Simulator::Simulator(const Program& program, const std::vector<std::pair<int,uint16_t>>& initial_data){
+Simulator::Simulator(const Program& program, const std::vector<std::pair<int,uint16_t>>& initial_data) 
+: state(program) {
     
-    //create a new simulator state with memory, rf, stations, and program
-    state = SimulatorState(program);
-    
-    //stats
-
-    //load initial data into memory
-    for(int i = 0; i < initial_data.size(); i++){
-        state.memory.preload(initial_data[i].first, initial_data[i].second);
+    // Preload memory with initial data
+    for (const auto& [address, value] : initial_data) {
+        state.memory.preload(address, value);
     }
+
 }
 
-void Simulator::run(){
-    state.pc_index = state.program.get_start_address(); //start executing from specified address 
-     
+// Run the simulation until completion
+void Simulator::run() {
+}
+
+// Get the current state of the simulator
+const SimulatorState& Simulator::get_state() const {
+    return state;
+}
+
+// Get the current statistics of the simulation
+const Stat& Simulator::get_stats() const {
+    return stats;
 }

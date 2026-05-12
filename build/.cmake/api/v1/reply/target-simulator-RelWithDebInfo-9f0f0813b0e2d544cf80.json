@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "Debug/simulator.exe"
+			"path" : "RelWithDebInfo/simulator.exe"
 		},
 		{
-			"path" : "Debug/simulator.pdb"
+			"path" : "RelWithDebInfo/simulator.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -52,7 +52,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "/DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd"
+					"fragment" : "/DWIN32 /D_WINDOWS /GR /EHsc /Zi /O2 /Ob1 /DNDEBUG -std:c++17 -MD"
 				},
 				{
 					"backtrace" : 3,
@@ -85,11 +85,11 @@
 	[
 		{
 			"backtrace" : 2,
-			"id" : "core::@6890427a1f51a3e7e1df"
+			"id" : "io::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 2,
-			"id" : "io::@6890427a1f51a3e7e1df"
+			"id" : "core::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 2,
@@ -113,7 +113,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "/DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd",
+				"fragment" : "/DWIN32 /D_WINDOWS /GR /EHsc /Zi /O2 /Ob1 /DNDEBUG -MD",
 				"role" : "flags"
 			},
 			{
@@ -122,27 +122,27 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "Debug\\core.lib",
+				"fragment" : "RelWithDebInfo\\core.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "Debug\\io.lib",
+				"fragment" : "RelWithDebInfo\\io.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "Debug\\parser.lib",
+				"fragment" : "RelWithDebInfo\\parser.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "Debug\\reporting.lib",
+				"fragment" : "RelWithDebInfo\\reporting.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "Debug\\simulation.lib",
+				"fragment" : "RelWithDebInfo\\simulation.lib",
 				"role" : "libraries"
 			},
 			{
