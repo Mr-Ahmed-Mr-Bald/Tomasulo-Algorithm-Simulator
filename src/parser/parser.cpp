@@ -1,22 +1,43 @@
-#include "../../include/parser/parser.h"
+#include "parser/input_parser.h"
+#include <algorithm>
+#include <cctype>
 #include <sstream>
 #include <stdexcept>
 #include <unordered_map>
 #include <unordered_set>
 
-Parser::Parser() {}
+InputParser::InputParser() {}
+
+namespace {
+std::string normalize_line(std::string line) {
+    for (char& ch : line) {
+        if (ch == ',' || ch == '(' || ch == ')') {
+            ch = ' ';
+        }
+    }
+    return line;
+}
+
+std::string uppercase(std::string token) {
+    std::transform(token.begin(), token.end(), token.begin(), [](unsigned char ch) {
+        return static_cast<char>(std::toupper(ch));
+    });
+    return token;
+}
+}
 
 /// @brief Parses a vector of assembly instruction lines into a Program object, starting from the specified start address
 /// @param lines the assembly instruction lines to parse 
 /// @param start_address the line number of the first instruction to execute, used as the starting index for instructions in the Program
 /// @return the parsed Program object
-Program Parser::parse(const std::vector<std::string>& lines, int start_address) {
+Program InputParser::parse(const std::vector<std::string>& lines, int start_address) {
     Program program(start_address);
 
     int pc = start_address;
 
     for (const auto& line : lines) {
-        if (line.empty()) continue;
+        if (line.find_first_not_of(" \t\r\n") == std::string::npos)
+            continue;
 
         Instruction inst = parse_line(line, pc);
         program.add_instruction(inst);
@@ -30,10 +51,11 @@ Program Parser::parse(const std::vector<std::string>& lines, int start_address) 
 /// @param line the string line of assembly instruction to parse
 /// @param address the line number of the instruction, used as the index for the Instruction object
 /// @return the parsed Instruction object
-Instruction Parser::parse_line(const std::string& line, int address) {
-    std::stringstream ss(line);
+Instruction InputParser::parse_line(const std::string& line, int address) {
+    std::stringstream ss(normalize_line(line));
     std::string opcode_token;
     ss >> opcode_token;
+    opcode_token = uppercase(opcode_token);
 
     if (!is_valid_opcode(opcode_token)) {
         throw std::runtime_error("Invalid opcode: " + opcode_token);
@@ -58,22 +80,22 @@ Instruction Parser::parse_line(const std::string& line, int address) {
 
     //instruction decoding based on opcode
     if (opcode == Enums::Opcode::RET) {
-        return Instruction(address, opcode, -1, -1, -1, line);
+        return Instruction(address, opcode, -1, 1, -1, line);
     }
 
     if (opcode == Enums::Opcode::CALL) {
-    int target;
+        int target;
 
-    if (!(ss >> target)) {
-        throw std::runtime_error("CALL requires target address or offset");
+        if (!(ss >> target)) {
+            throw std::runtime_error("CALL requires target address");
+        }
+
+        return Instruction(address, opcode,
+                           1,      // CALL always writes the return address to R1
+                           -1,
+                           target, // call target
+                           line);
     }
-
-    return Instruction(address, opcode,
-                       -1,    // dest
-                       -1,    // src1
-                       target,// src2 = call target
-                       line);
-}
 
 
     if (opcode == Enums::Opcode::ADD ||
@@ -82,12 +104,9 @@ Instruction Parser::parse_line(const std::string& line, int address) {
         opcode == Enums::Opcode::MUL) {
 
         std::string rd_token, rs1_token, rs2_token;
-        char comma1, comma2;
 
-        ss >> rd_token >> comma1 >> rs1_token >> comma2 >> rs2_token;
-
-        if (comma1 != ',' || comma2 != ',')
-            throw std::runtime_error("Expected commas in arithmetic instruction");
+        if (!(ss >> rd_token >> rs1_token >> rs2_token))
+            throw std::runtime_error("Invalid arithmetic instruction format");
 
         if (!is_valid_register(rd_token) ||
             !is_valid_register(rs1_token) ||
@@ -105,13 +124,10 @@ Instruction Parser::parse_line(const std::string& line, int address) {
         opcode == Enums::Opcode::STORE) {
 
         std::string rd_token;
-        char comma, lparen, rparen;
         int offset;
         std::string rs_token;
 
-        ss >> rd_token >> comma >> offset >> lparen >> rs_token >> rparen;
-
-        if (comma != ',' || lparen != '(' || rparen != ')')
+        if (!(ss >> rd_token >> offset >> rs_token))
             throw std::runtime_error("Invalid memory instruction format");
 
         if (!is_valid_register(rd_token) || !is_valid_register(rs_token))
@@ -126,12 +142,9 @@ Instruction Parser::parse_line(const std::string& line, int address) {
 
     if (opcode == Enums::Opcode::BEQ) {
         std::string r1, r2;
-        char c1, c2;
         int offset;
 
-        ss >> r1 >> c1 >> r2 >> c2 >> offset;
-
-        if (c1 != ',' || c2 != ',')
+        if (!(ss >> r1 >> r2 >> offset))
             throw std::runtime_error("Invalid BEQ format");
 
         if (!is_valid_register(r1) || !is_valid_register(r2))
@@ -140,7 +153,7 @@ Instruction Parser::parse_line(const std::string& line, int address) {
         rs1 = std::stoi(r1.substr(1));
         rs2 = std::stoi(r2.substr(1));
 
-        return Instruction(address, opcode, -1, rs1, rs2, line);
+        return Instruction(address, opcode, offset, rs1, rs2, line);
     }
 
     throw std::runtime_error("Unhandled instruction: " + line);
@@ -149,18 +162,22 @@ Instruction Parser::parse_line(const std::string& line, int address) {
 /// @brief checks if a given token is a valid register in the format "r0" to "r7"
 /// @param token the string token to validate as a register
 /// @return true if the token is a valid register, false otherwise
-bool Parser::is_valid_register(const std::string& token) const {
-    if (token.size() < 2 || token[0] != 'r')
+bool InputParser::is_valid_register(const std::string& token) const {
+    if (token.size() < 2 || (token[0] != 'r' && token[0] != 'R'))
         return false;
 
-    int reg = std::stoi(token.substr(1));
-    return reg >= 0 && reg <= 7;
+    try {
+        int reg = std::stoi(token.substr(1));
+        return reg >= 0 && reg < Config::NUM_REGS;
+    } catch (...) {
+        return false;
+    }
 }
 
 /// @brief checks if a given token is a valid opcode from the supported instruction set
 /// @param token the string token to validate as an opcode
 /// @return true if the token is a valid opcode, false otherwise
-bool Parser::is_valid_opcode(const std::string& token) const {
+bool InputParser::is_valid_opcode(const std::string& token) const {
     static const std::unordered_set<std::string> valid_ops = {
         "LOAD", "STORE", "BEQ", "CALL", "RET",
         "ADD", "SUB", "AND", "MUL"

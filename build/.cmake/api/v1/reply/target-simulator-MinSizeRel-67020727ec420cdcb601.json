@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "Debug/simulator.exe"
+			"path" : "MinSizeRel/simulator.exe"
 		},
 		{
-			"path" : "Debug/simulator.pdb"
+			"path" : "MinSizeRel/simulator.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -52,7 +52,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "/DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd"
+					"fragment" : "/DWIN32 /D_WINDOWS /GR /EHsc /O1 /Ob1 /DNDEBUG -std:c++17 -MD"
 				},
 				{
 					"backtrace" : 3,
@@ -85,14 +85,6 @@
 	[
 		{
 			"backtrace" : 2,
-			"id" : "io::@6890427a1f51a3e7e1df"
-		},
-		{
-			"backtrace" : 2,
-			"id" : "core::@6890427a1f51a3e7e1df"
-		},
-		{
-			"backtrace" : 2,
 			"id" : "parser::@6890427a1f51a3e7e1df"
 		},
 		{
@@ -101,10 +93,18 @@
 		},
 		{
 			"backtrace" : 2,
-			"id" : "simulation::@6890427a1f51a3e7e1df"
+			"id" : "core::@6890427a1f51a3e7e1df"
 		},
 		{
 			"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "io::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "simulation::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "simulator::@6890427a1f51a3e7e1df",
@@ -113,36 +113,36 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "/DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd",
+				"fragment" : "/DWIN32 /D_WINDOWS /GR /EHsc /O1 /Ob1 /DNDEBUG -MD",
 				"role" : "flags"
 			},
 			{
-				"fragment" : "/machine:x64 /debug /INCREMENTAL /subsystem:console",
+				"fragment" : "/machine:x64 /INCREMENTAL:NO /subsystem:console",
 				"role" : "flags"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "Debug\\core.lib",
+				"fragment" : "MinSizeRel\\core.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "Debug\\io.lib",
+				"fragment" : "MinSizeRel\\io.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "Debug\\parser.lib",
+				"fragment" : "MinSizeRel\\parser.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "Debug\\reporting.lib",
+				"fragment" : "MinSizeRel\\reporting.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "Debug\\simulation.lib",
+				"fragment" : "MinSizeRel\\simulation.lib",
 				"role" : "libraries"
 			},
 			{

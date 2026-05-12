@@ -8,11 +8,23 @@ Instruction::Instruction(
     int src1,
     int src2,
     const std::string& raw_instruction
-) : index(index), opcode(opcode), dest(dest), src1(src1), src2(src2), raw_instruction(raw_instruction) {}
+) : index(index),
+    dynamic_id(-1),
+    raw_instruction(raw_instruction),
+    opcode(opcode),
+    dest(dest),
+    src1(src1),
+    src2(src2),
+    stage_state(Enums::StageState::Waiting) {}
 
 // Instruction index
 int Instruction::get_index() const {
     return index;
+}
+
+// Dynamic instruction issue order
+int Instruction::get_dynamic_id() const {
+    return dynamic_id;
 }
 
 // Raw string instruction
@@ -48,6 +60,11 @@ Enums::StageState Instruction::get_stage_state() const {
 // Instruction's timing
 InstructionTiming Instruction::get_timing() const {
     return timing;
+}
+
+// Set dynamic issue order
+void Instruction::set_dynamic_id(int id) {
+    dynamic_id = id;
 }
 
 // Set instruction stage state to specific value

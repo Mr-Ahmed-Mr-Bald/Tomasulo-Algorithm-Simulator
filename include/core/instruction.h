@@ -18,6 +18,7 @@ class InstructionTiming {
 class Instruction {
   // Properties
   int index;
+  int dynamic_id;
   std::string raw_instruction;
   Enums::Opcode opcode;
   int dest;
@@ -33,6 +34,7 @@ class Instruction {
 
   // Getters
   int get_index() const;
+  int get_dynamic_id() const;
   std::string get_raw_instruction() const;
   Enums::Opcode get_opcode() const;
   int get_dest() const;
@@ -42,6 +44,7 @@ class Instruction {
   InstructionTiming get_timing() const;
 
   // Setters
+  void set_dynamic_id(int id);
   void set_stage_state(Enums::StageState state);
   void set_timing(Enums::StageState state, int cycle);
 };

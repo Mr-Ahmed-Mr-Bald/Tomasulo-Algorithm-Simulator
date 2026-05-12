@@ -19,9 +19,14 @@ class Program {
 
   // Methods
   void add_instruction(const Instruction& inst);
-  Instruction get(int index) const;
+  const Instruction& get(int index) const;
+  Instruction& get(int index);
+  const Instruction& get_by_address(int address) const;
+  Instruction& get_by_address(int address);
   int size() const;
-  int Program::get_start_address() const;
+  int get_start_address() const;
+  int get_end_address() const;
+  bool contains_address(int address) const;
   bool empty() const;
 
 };

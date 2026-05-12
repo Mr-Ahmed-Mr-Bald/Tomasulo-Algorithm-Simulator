@@ -8,12 +8,14 @@
 #include "core/station_manager.h"
 #include "core/simulator_state.h"
 #include "core/stats.h"
+#include <memory>
 
 // Class representing the main controller of the Tomasulo execution
 class Simulator {
   // Properties
   SimulatorState state;
   Stat stats;
+  std::vector<std::unique_ptr<Instruction>> instruction_pool;
   std::vector<Instruction*> issue_queue, execute_queue, write_back_queue, finished_instructions;
 
   public:
@@ -24,6 +26,7 @@ class Simulator {
   void run();
   const SimulatorState& get_state() const;
   const Stat& get_stats() const;
+  const std::vector<Instruction*>& get_instruction_trace() const;
 };
 
 #endif // SIMULATOR_H

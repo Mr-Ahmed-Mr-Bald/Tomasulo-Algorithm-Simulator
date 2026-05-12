@@ -85,14 +85,6 @@
 	[
 		{
 			"backtrace" : 2,
-			"id" : "io::@6890427a1f51a3e7e1df"
-		},
-		{
-			"backtrace" : 2,
-			"id" : "core::@6890427a1f51a3e7e1df"
-		},
-		{
-			"backtrace" : 2,
 			"id" : "parser::@6890427a1f51a3e7e1df"
 		},
 		{
@@ -101,10 +93,18 @@
 		},
 		{
 			"backtrace" : 2,
-			"id" : "simulation::@6890427a1f51a3e7e1df"
+			"id" : "core::@6890427a1f51a3e7e1df"
 		},
 		{
 			"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "io::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "simulation::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "simulator::@6890427a1f51a3e7e1df",

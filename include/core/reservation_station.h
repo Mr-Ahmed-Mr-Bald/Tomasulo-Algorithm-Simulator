@@ -27,7 +27,7 @@ class ReservationStation {
   int qk;
 
   // Address / special field
-  uint16_t A;
+  int A;
   bool branch;
 
   // Execution state
@@ -45,18 +45,38 @@ class ReservationStation {
 
   // Methods
   void clear();
-  void allocate(Enums::Opcode op, int instruction_id, uint16_t vj, uint16_t vk, int qj, int qk, uint16_t A);
+  void allocate(Enums::Opcode op, int instruction_id, uint16_t vj, uint16_t vk, int qj, int qk, int A);
   bool is_free() const;
+  bool is_busy() const;
   bool operands_ready() const;
   void start_execution();
+  void decrement_cycle();
   void execute();
   void write_result();  
   int get_id() const;
+  Enums::RSClass get_type() const;
+  Enums::Opcode get_op() const;
+  int get_instruction_id() const;
+  bool has_started() const;
+  bool has_finished() const;
+  int get_remaining_cycles() const;
+  uint16_t get_vj() const;
+  uint16_t get_vk() const;
+  int get_qj() const;
+  int get_qk() const;
+  int getA() const;
+  bool branch_taken() const;
+  uint16_t get_result() const;
+  int get_result_address() const;
   void set_vj(uint16_t v);
   void set_vk(uint16_t v);
   void set_qj(int tag);
   void set_qk(int tag);
-  void setA(uint16_t value);
+  void setA(int value);
+  void set_result(uint16_t value);
+  void set_result_address(int address);
+  void set_branch_taken(bool taken);
+  void mark_finished();
 
 };
 

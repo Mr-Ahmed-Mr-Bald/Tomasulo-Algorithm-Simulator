@@ -2,16 +2,17 @@
 #define PARSER_H
 
 // Required headers
-#include "../core/config.h"
-#include "../core/program.h"
-#include "../core/instruction.h"
+#include "core/config.h"
+#include "core/program.h"
+#include "core/instruction.h"
+#include <vector>
 
 // Class responsible for parsing assembly text into a Program
-class Parser {
+class InputParser {
   // Properties
   public:
   // Constructor
-  Parser();
+  InputParser();
 
   // Methods
   Program parse(const std::vector<std::string>& lines, int start_address);

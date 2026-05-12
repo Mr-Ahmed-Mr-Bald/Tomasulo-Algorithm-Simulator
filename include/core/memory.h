@@ -12,14 +12,14 @@ class Memory {
   //initialize the memory directly with the fixed mem size
   std::vector<uint16_t> data;
   
-  bool is_valid_address(int address);
+  bool is_valid_address(int address) const;
 
   public:
   Memory() : data(Config::MEM_SIZE) {}
 
   // Methods
   void reset();
-  uint16_t load(int address);
+  uint16_t load(int address) const;
   void store(int address, uint16_t value);
   void preload(int address, uint16_t value);
 };

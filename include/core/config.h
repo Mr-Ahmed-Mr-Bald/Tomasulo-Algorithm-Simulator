@@ -16,8 +16,8 @@ namespace Config {
   
   // Default number of reservation stations and execution cycles for each class of instructions
   // Load, Store, Branch, Call/Ret, Add/Sub, And, Mul
-  int reservation_station_num[] = { 2, 2, 2, 1, 4, 2, 1 };
-  int execution_cycles[] = { 8, 8, 1, 1, 2, 1, 8 };
+  inline int reservation_station_num[] = { 2, 2, 2, 1, 4, 2, 1 };
+  inline int execution_cycles[] = { 8, 8, 1, 1, 2, 1, 8 };
   
   int get_reservation_station_num(int);
   int get_execution_cycles(int);

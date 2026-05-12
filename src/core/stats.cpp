@@ -29,12 +29,46 @@ void Stat::record_misprediction() {
     branch_mispredictions++;
 }
 
+// Set the total number of spanned cycles
+void Stat::set_cycles_spanned(int cycles) {
+    cycles_spanned = cycles;
+}
+
+// Get the number of issued instructions
+int Stat::get_instruction_count() const {
+    return instruction_count;
+}
+
+// Get the number of completed instructions
+int Stat::get_completed_instructions() const {
+    return completed_instructions;
+}
+
+// Get the number of encountered branches
+int Stat::get_branch_count() const {
+    return branch_count;
+}
+
+// Get the number of branch mispredictions
+int Stat::get_branch_mispredictions() const {
+    return branch_mispredictions;
+}
+
+// Get the total execution time in cycles
+int Stat::get_cycles_spanned() const {
+    return cycles_spanned;
+}
+
 // Calculate and return the Instructions Per Cycle (IPC) as a double
 double Stat::ipc() const {
+    if (cycles_spanned == 0)
+        return 0.0;
     return (double)(completed_instructions) / cycles_spanned;
 }
 
 // Calculate and return the branch misprediction percentage as a double
 double Stat::misprediction_percent() const {
+    if (branch_count == 0)
+        return 0.0;
     return (double)(branch_mispredictions) / branch_count * 100;
 }

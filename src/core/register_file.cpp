@@ -29,10 +29,13 @@ uint16_t RegisterFile::read(int address) const {
 
 // Writes to the specified register
 void RegisterFile::write(int address, uint16_t val){
-    if(is_valid_address(address))
-        value[address] = val;
-    else
+    if (!is_valid_address(address))
         throw std::out_of_range("Invalid register address");
+
+    if (address == 0)
+        return;
+
+    value[address] = val;
 }
 
 // Checks if the register is ready
@@ -51,16 +54,32 @@ int RegisterFile::get_producer(int address) const {
 
 // Sets the producer tag
 void RegisterFile::set_producer(int address, int stationId) {
-    if(is_valid_address(address)) {
-        producer_tag[address] = stationId;
-        ready[address] = false;
+    if (!is_valid_address(address))
+        throw std::out_of_range("Invalid register address");
+
+    if (address == 0) {
+        producer_tag[address] = Config::FREE_RESERVATION_STATION;
+        ready[address] = true;
+        value[address] = 0;
+        return;
     }
+
+    producer_tag[address] = stationId;
+    ready[address] = false;
 }
 
 // Clears the producer tag (set to -1)
 void RegisterFile::clear_producer(int address) {
-    if(is_valid_address(address)) {
+    if (!is_valid_address(address))
+        throw std::out_of_range("Invalid register address");
+
+    if (address == 0) {
         producer_tag[address] = Config::FREE_RESERVATION_STATION;
         ready[address] = true;
+        value[address] = 0;
+        return;
     }
+
+    producer_tag[address] = Config::FREE_RESERVATION_STATION;
+    ready[address] = true;
 }

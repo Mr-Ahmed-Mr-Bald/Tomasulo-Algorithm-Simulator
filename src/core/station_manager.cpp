@@ -34,11 +34,54 @@ ReservationStation* StationManager::get_by_id(int id) {
     return nullptr; // No station with the given ID found
 }
 
+// Gets a reservation station by its current instruction id
+ReservationStation* StationManager::get_by_instruction_id(int instruction_id) {
+    for (auto& station_list : stations) {
+        for (auto& station : station_list) {
+            if (!station.is_free() && station.get_instruction_id() == instruction_id) {
+                return &station;
+            }
+        }
+    }
+    return nullptr;
+}
+
 // Gets all reservation stations of a specific type
 std::vector<ReservationStation*> StationManager::get_stations_of_type(Enums::RSClass type) {
     std::vector<ReservationStation*> result;
     for (auto& station : stations[static_cast<int>(type)]) {
         result.push_back(&station);
+    }
+    return result;
+}
+
+// Gets all reservation stations of a specific type (const overload)
+std::vector<const ReservationStation*> StationManager::get_stations_of_type(Enums::RSClass type) const {
+    std::vector<const ReservationStation*> result;
+    for (const auto& station : stations[static_cast<int>(type)]) {
+        result.push_back(&station);
+    }
+    return result;
+}
+
+// Gets all reservation stations
+std::vector<ReservationStation*> StationManager::get_all_stations() {
+    std::vector<ReservationStation*> result;
+    for (auto& station_list : stations) {
+        for (auto& station : station_list) {
+            result.push_back(&station);
+        }
+    }
+    return result;
+}
+
+// Gets all reservation stations (const overload)
+std::vector<const ReservationStation*> StationManager::get_all_stations() const {
+    std::vector<const ReservationStation*> result;
+    for (const auto& station_list : stations) {
+        for (const auto& station : station_list) {
+            result.push_back(&station);
+        }
     }
     return result;
 }

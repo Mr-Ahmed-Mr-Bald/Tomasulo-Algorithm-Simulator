@@ -2,19 +2,21 @@
 
 // Constructor
 SimulatorState::SimulatorState(const Program& program)
-    : program(program), stations(memory) {}
+    : program(program), stations(memory) {
+    reset();
+}
 
 void SimulatorState::reset(){
     registers.reset();
     memory.reset();
     stations.reset();
     cycle = 0;
-    pc_index = 0;
+    pc_index = program.get_start_address();
 }
 
 // The simulation has finished if we've reached the last instruction in the program
 bool SimulatorState::finished() const {
-    return pc_index == int(program.size());
+    return !program.contains_address(pc_index);
 }
 
 // Move to the next instruction in the program

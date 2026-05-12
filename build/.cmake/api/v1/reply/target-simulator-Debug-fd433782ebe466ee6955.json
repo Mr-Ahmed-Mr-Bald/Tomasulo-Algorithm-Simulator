@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "Release/simulator.exe"
+			"path" : "Debug/simulator.exe"
 		},
 		{
-			"path" : "Release/simulator.pdb"
+			"path" : "Debug/simulator.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -52,7 +52,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "/DWIN32 /D_WINDOWS /GR /EHsc /O2 /Ob2 /DNDEBUG -std:c++17 -MD"
+					"fragment" : "/DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd"
 				},
 				{
 					"backtrace" : 3,
@@ -85,14 +85,6 @@
 	[
 		{
 			"backtrace" : 2,
-			"id" : "io::@6890427a1f51a3e7e1df"
-		},
-		{
-			"backtrace" : 2,
-			"id" : "core::@6890427a1f51a3e7e1df"
-		},
-		{
-			"backtrace" : 2,
 			"id" : "parser::@6890427a1f51a3e7e1df"
 		},
 		{
@@ -101,10 +93,18 @@
 		},
 		{
 			"backtrace" : 2,
-			"id" : "simulation::@6890427a1f51a3e7e1df"
+			"id" : "core::@6890427a1f51a3e7e1df"
 		},
 		{
 			"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "io::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "simulation::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "simulator::@6890427a1f51a3e7e1df",
@@ -113,36 +113,36 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "/DWIN32 /D_WINDOWS /GR /EHsc /O2 /Ob2 /DNDEBUG -MD",
+				"fragment" : "/DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd",
 				"role" : "flags"
 			},
 			{
-				"fragment" : "/machine:x64 /INCREMENTAL:NO /subsystem:console",
+				"fragment" : "/machine:x64 /debug /INCREMENTAL /subsystem:console",
 				"role" : "flags"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "Release\\core.lib",
+				"fragment" : "Debug\\core.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "Release\\io.lib",
+				"fragment" : "Debug\\io.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "Release\\parser.lib",
+				"fragment" : "Debug\\parser.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "Release\\reporting.lib",
+				"fragment" : "Debug\\reporting.lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "Release\\simulation.lib",
+				"fragment" : "Debug\\simulation.lib",
 				"role" : "libraries"
 			},
 			{

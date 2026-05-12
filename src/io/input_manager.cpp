@@ -1,4 +1,5 @@
-#include "../../include/io/input_manager.h"
+#include "io/input_manager.h"
+#include <filesystem>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -57,13 +58,19 @@ std::vector<std::string> InputManager::read_from_user_file() {
 /// @return relative path to the file as a string
 std::string InputManager::read_filename_from_user() {
     std::string filename;
-    std::cout << "Enter assembly file name (e.g. program.txt): ";
+    std::cout << "Enter assembly file path (e.g. program.txt or Test\\arithmetic_memory\\program.txt): ";
     std::getline(std::cin, filename);
 
-    // Prepend relative data directory
-    std::string path = "data/" + filename;
+    if (std::filesystem::exists(filename)) {
+        return filename;
+    }
 
-    return path;
+    std::string fallback_path = "data/" + filename;
+    if (std::filesystem::exists(fallback_path)) {
+        return fallback_path;
+    }
+
+    return filename;
 }
 
 /// @brief Reads assembly instructions from a file specified by the user
@@ -137,14 +144,14 @@ std::vector<int> InputManager::read_functional_unit_sizes() {
     std::cout << "  Load  Store  Branch  Call/Ret  Add/Sub  And  Mul\n";
     std::cout << "Example:\n";
     std::cout << "  2 3 3 4 1 3 2\n";
-    std::cout << "Or type 'default' to keep default configuration\n";
+    std::cout << "Or type 'default' (or press Enter) to keep default configuration\n";
     std::cout << "> ";
 
     std::string line;
     std::getline(std::cin, line);
 
-    if (line == "default") {
-        return std::vector<int>({ 2, 2, 2, 1, 4, 2, 1 }); // empty vector signals default
+    if (line.empty() || line == "default") {
+        return {};
     }
 
     std::stringstream ss(line);
@@ -162,6 +169,45 @@ std::vector<int> InputManager::read_functional_unit_sizes() {
         throw std::runtime_error(
             "Expected " + std::to_string(Config::NUM_FUNCTIONAL_UNITS) +
             " values for functional units"
+        );
+    }
+
+    return values;
+}
+
+/// @brief Prompts user to input execution cycles for each functional unit type or keep defaults
+/// @return vector of execution latencies ordered by functional unit class
+std::vector<int> InputManager::read_functional_unit_cycles() {
+    std::cout << "\nEnter execution cycles for each instruction class:\n";
+    std::cout << "Order:\n";
+    std::cout << "  Load  Store  Branch  Call/Ret  Add/Sub  And  Mul\n";
+    std::cout << "Example:\n";
+    std::cout << "  8 8 1 1 2 1 8\n";
+    std::cout << "Or type 'default' (or press Enter) to keep default latencies\n";
+    std::cout << "> ";
+
+    std::string line;
+    std::getline(std::cin, line);
+
+    if (line.empty() || line == "default") {
+        return {};
+    }
+
+    std::stringstream ss(line);
+    std::vector<int> values;
+    int x;
+
+    while (ss >> x) {
+        if (x <= 0) {
+            throw std::runtime_error("Execution cycles must be positive");
+        }
+        values.push_back(x);
+    }
+
+    if (values.size() != Config::NUM_FUNCTIONAL_UNITS) {
+        throw std::runtime_error(
+            "Expected " + std::to_string(Config::NUM_FUNCTIONAL_UNITS) +
+            " values for execution cycles"
         );
     }
 
