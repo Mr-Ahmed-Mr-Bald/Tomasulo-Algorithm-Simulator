@@ -1,0 +1,21 @@
+Monday 11th of May 2026
+Implemented 
+    config.cpp
+    instruction.cpp
+    memory.cpp
+    program.cpp
+    register_file.cpp
+    reservation_station.cpp -- only initial backbone
+    simulator_state.cpp
+    station_manager.cpp
+    stats.cpp
+    simulator.cpp -- only initial backbone
+
+Tuesday 12th of May 2026
+Implemented 
+    InputManager.h & .cpp
+    Parser.h & .cpp
+    App.cpp (only as much as is relating to input management)
+    Bonus 1 & 2
+
+
