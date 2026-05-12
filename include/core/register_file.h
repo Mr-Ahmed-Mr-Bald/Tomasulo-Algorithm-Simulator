@@ -24,12 +24,12 @@ class RegisterFile {
 
   // Methods
   void reset();
-  uint16_t read(int reg) const;
-  void write(int reg, uint16_t val);
-  bool is_ready(int reg) const;
-  int get_producer(int reg) const;
-  void set_producer(int reg, int stationId);
-  void clear_producer(int reg, int stationId);
+  uint16_t read(int address) const;
+  void write(int address, uint16_t val);
+  bool is_ready(int address) const;
+  int get_producer(int address) const;
+  void set_producer(int address, int station_id);
+  void clear_producer(int address, int station_id);
 };
 
 #endif // REGISTER_FILE_H

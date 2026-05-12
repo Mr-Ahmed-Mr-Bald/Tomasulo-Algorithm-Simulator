@@ -5,7 +5,7 @@
 
 // Constructor
 ReservationStation::ReservationStation(int id, Enums::RSClass type, Memory &memory) 
-    : id(id), type(type), memory(memory) 
+    : id(id), type(type), memory(&memory)
 {
     clear();
 }
@@ -26,10 +26,15 @@ void ReservationStation::clear() {
 }
 
 // Allocates the reservation station for a new instruction
-void ReservationStation::allocate(Enums::Opcode op, int instruction_id, int latency) { 
+void ReservationStation::allocate(Enums::Opcode op_, int instruction_id_, uint16_t vj_, uint16_t vk_, int qj_, int qk_, uint16_t A_) { 
     busy = true;
-    this->op = op;
-    this->instruction_id = instruction_id;
+    op = op_;
+    instruction_id = instruction_id_;
+    set_vj(vj_);
+    set_vk(vk_);
+    set_qj(qj_);
+    set_qk(qk_);
+    setA(A_);
 }
 
 // Returns whether the reservation station is free
@@ -68,7 +73,7 @@ void ReservationStation::set_qk(int tag) {
 }
 
 // Sets the value of the address field A
-void ReservationStation::setA(int value) {
+void ReservationStation::setA(uint16_t value) {
     A = value;
 }
 
@@ -83,11 +88,11 @@ void ReservationStation::execute() {
     switch(op) {
         case Enums::Opcode::LOAD:
             A += vj;
-            result = memory.load(A);
+            result = memory->load(A);
             break;
         
         case Enums::Opcode::STORE:
-            memory.store(A + vj, vk); // address, value
+            memory->store(A + vj, vk); // address, value
             break;
         
         case Enums::Opcode::BEQ:

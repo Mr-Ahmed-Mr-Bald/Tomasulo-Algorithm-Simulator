@@ -11,8 +11,7 @@
 // Class representing a reservation station entry
 class ReservationStation {
   // Properties
-  Memory &memory;
-  RegisterFile &registers;
+  Memory *memory = nullptr;
   int id;
   Enums::RSClass type;
   bool busy;
@@ -28,7 +27,7 @@ class ReservationStation {
   int qk;
 
   // Address / special field
-  int A;
+  uint16_t A;
   bool branch;
 
   // Execution state
@@ -46,7 +45,7 @@ class ReservationStation {
 
   // Methods
   void clear();
-  void allocate(Enums::Opcode op, int instruction_id, int latency);
+  void allocate(Enums::Opcode op, int instruction_id, uint16_t vj, uint16_t vk, int qj, int qk, uint16_t A);
   bool is_free() const;
   bool operands_ready() const;
   void start_execution();
@@ -57,7 +56,7 @@ class ReservationStation {
   void set_vk(uint16_t v);
   void set_qj(int tag);
   void set_qk(int tag);
-  void setA(int value);
+  void setA(uint16_t value);
 
 };
 

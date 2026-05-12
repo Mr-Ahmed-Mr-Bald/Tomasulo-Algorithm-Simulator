@@ -1,0 +1,10 @@
+D:\AUC\Semester Five\Computer Architecture\Project II\src\core\app.cpp;D:\AUC\Semester Five\Computer Architecture\Project II\build\core.dir\Debug\app.obj
+D:\AUC\Semester Five\Computer Architecture\Project II\src\core\config.cpp;D:\AUC\Semester Five\Computer Architecture\Project II\build\core.dir\Debug\config.obj
+D:\AUC\Semester Five\Computer Architecture\Project II\src\core\instruction.cpp;D:\AUC\Semester Five\Computer Architecture\Project II\build\core.dir\Debug\instruction.obj
+D:\AUC\Semester Five\Computer Architecture\Project II\src\core\memory.cpp;D:\AUC\Semester Five\Computer Architecture\Project II\build\core.dir\Debug\memory.obj
+D:\AUC\Semester Five\Computer Architecture\Project II\src\core\program.cpp;D:\AUC\Semester Five\Computer Architecture\Project II\build\core.dir\Debug\program.obj
+D:\AUC\Semester Five\Computer Architecture\Project II\src\core\register_file.cpp;D:\AUC\Semester Five\Computer Architecture\Project II\build\core.dir\Debug\register_file.obj
+D:\AUC\Semester Five\Computer Architecture\Project II\src\core\reservation_station.cpp;D:\AUC\Semester Five\Computer Architecture\Project II\build\core.dir\Debug\reservation_station.obj
+D:\AUC\Semester Five\Computer Architecture\Project II\src\core\simulator_state.cpp;D:\AUC\Semester Five\Computer Architecture\Project II\build\core.dir\Debug\simulator_state.obj
+D:\AUC\Semester Five\Computer Architecture\Project II\src\core\station_manager.cpp;D:\AUC\Semester Five\Computer Architecture\Project II\build\core.dir\Debug\station_manager.obj
+D:\AUC\Semester Five\Computer Architecture\Project II\src\core\stats.cpp;D:\AUC\Semester Five\Computer Architecture\Project II\build\core.dir\Debug\stats.obj

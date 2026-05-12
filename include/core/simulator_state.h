@@ -50,7 +50,6 @@ class SimulatorState {
   // Methods
   void reset();
   bool finished() const;
-  Instruction* current_instruction();
   void advance_pc();
   void jump_to_address(int address);
 };

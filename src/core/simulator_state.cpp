@@ -1,7 +1,8 @@
 #include "core/simulator_state.h"
 
 // Constructor
-SimulatorState::SimulatorState(const Program& program) : program(program) {}
+SimulatorState::SimulatorState(const Program& program)
+    : program(program), stations(memory) {}
 
 void SimulatorState::reset(){
     registers.reset();
@@ -14,11 +15,6 @@ void SimulatorState::reset(){
 // The simulation has finished if we've reached the last instruction in the program
 bool SimulatorState::finished() const {
     return pc_index == int(program.size());
-}
-
-// The current instruction being executed
-Instruction* SimulatorState::current_instruction(){
-    return &(program.get(pc_index));
 }
 
 // Move to the next instruction in the program

@@ -1,0 +1,35 @@
+================================================================================
+Linker Errors
+Generated: 2026-05-12T14:56:33.704Z
+Total Errors: 10
+================================================================================
+
+[LNK4006] (MSVC)
+"int * Config::reservation_station_num" (?reservation_station_num@Config@@3PAHA) already defined in station_manager.obj; second definition ignored [D:\AUC\Semester Five\Computer Architecture\Project II\build\core.vcxproj]
+
+[LNK4006] (MSVC)
+"int * Config::execution_cycles" (?execution_cycles@Config@@3PAHA) already defined in station_manager.obj; second definition ignored [D:\AUC\Semester Five\Computer Architecture\Project II\build\core.vcxproj]
+
+[LNK4006] (MSVC)
+"int * Config::reservation_station_num" (?reservation_station_num@Config@@3PAHA) already defined in station_manager.obj; second definition ignored [D:\AUC\Semester Five\Computer Architecture\Project II\build\core.vcxproj]
+
+[LNK4006] (MSVC)
+"int * Config::execution_cycles" (?execution_cycles@Config@@3PAHA) already defined in station_manager.obj; second definition ignored [D:\AUC\Semester Five\Computer Architecture\Project II\build\core.vcxproj]
+
+[LNK4006] (MSVC)
+"int * Config::reservation_station_num" (?reservation_station_num@Config@@3PAHA) already defined in station_manager.obj; second definition ignored [D:\AUC\Semester Five\Computer Architecture\Project II\build\core.vcxproj]
+
+[LNK4006] (MSVC)
+"int * Config::execution_cycles" (?execution_cycles@Config@@3PAHA) already defined in station_manager.obj; second definition ignored [D:\AUC\Semester Five\Computer Architecture\Project II\build\core.vcxproj]
+
+[LNK4006] (MSVC)
+"int * Config::reservation_station_num" (?reservation_station_num@Config@@3PAHA) already defined in station_manager.obj; second definition ignored [D:\AUC\Semester Five\Computer Architecture\Project II\build\core.vcxproj]
+
+[LNK4006] (MSVC)
+"int * Config::execution_cycles" (?execution_cycles@Config@@3PAHA) already defined in station_manager.obj; second definition ignored [D:\AUC\Semester Five\Computer Architecture\Project II\build\core.vcxproj]
+
+[LNK4006] (MSVC)
+"int * Config::reservation_station_num" (?reservation_station_num@Config@@3PAHA) already defined in station_manager.obj; second definition ignored [D:\AUC\Semester Five\Computer Architecture\Project II\build\core.vcxproj]
+
+[LNK4006] (MSVC)
+"int * Config::execution_cycles" (?execution_cycles@Config@@3PAHA) already defined in station_manager.obj; second definition ignored [D:\AUC\Semester Five\Computer Architecture\Project II\build\core.vcxproj]

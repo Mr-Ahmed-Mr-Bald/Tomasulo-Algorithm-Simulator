@@ -53,7 +53,7 @@ void RegisterFile::set_producer(int address, int stationId) {
 }
 
 // Clears the producer tag (set to -1)
-void RegisterFile::clear_producer(int reg, int stationId) {
+void RegisterFile::clear_producer(int reg, int station_id) {
     if(is_valid_address(reg)) {
         producer_tag[reg] = Config::FREE_RESERVATION_STATION;
         ready[reg] = true;

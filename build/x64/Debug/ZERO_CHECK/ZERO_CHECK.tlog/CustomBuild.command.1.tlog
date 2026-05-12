@@ -1,0 +1,10 @@
+^D:\AUC\SEMESTER FIVE\COMPUTER ARCHITECTURE\PROJECT II\BUILD\CMAKEFILES\C76DB001E50F74B51FDB29C32D0723CD\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" "-SD:/AUC/Semester Five/Computer Architecture/Project II" "-BD:/AUC/Semester Five/Computer Architecture/Project II/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "D:/AUC/Semester Five/Computer Architecture/Project II/build/tomasulo.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
