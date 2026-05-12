@@ -21,6 +21,7 @@ class Program {
   void add_instruction(const Instruction& inst);
   Instruction get(int index) const;
   int size() const;
+  int Program::get_start_address() const;
   bool empty() const;
 
 };

@@ -22,6 +22,6 @@ bool Program::empty() const{
     return instructions.empty();
 }
 
-int Program::get_start_address() const{
+int Program::get_start_address() const {
     return start_address;
 }
