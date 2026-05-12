@@ -2,7 +2,9 @@
 #define STATION_MANAGER_H
 
 // Required headers
-#include "config.h"
+#include "core/config.h"
+#include "core/enums.h"
+#include "core/memory.h"
 #include "reservation_station.h"
 #include <unordered_map>
 #include <vector>
@@ -11,19 +13,17 @@
 // Class representing the manager of all reservation stations
 class StationManager {
   // Properties
-  std::vector<ReservationStation> stations;
-  std::unordered_map<RSClass, std::vector<int>> indices_by_type;
+  std::vector<std::vector<ReservationStation>> stations;
 
   public:
   // Constructor
-  StationManager();
+  StationManager(Memory &memory);
 
   // Methods
-  ReservationStation* find_free(RSClass type);
+  ReservationStation* find_free(Enums::RSClass type);
   ReservationStation* get_by_id(int id);
-  std::vector<ReservationStation*> get_stations_of_type(RSClass type);
+  std::vector<ReservationStation*> get_stations_of_type(Enums::RSClass type);
   void reset();
-  std::vector<ReservationStation*> ready_to_write_back();
 };
 
 #endif // STATION_MANAGER_H

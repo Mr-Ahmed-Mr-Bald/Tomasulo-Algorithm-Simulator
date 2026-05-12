@@ -13,6 +13,7 @@ class ReservationStation {
   // Properties
   Memory &memory;
   RegisterFile &registers;
+  int id;
   Enums::RSClass type;
   bool busy;
   Enums::Opcode op;
@@ -41,7 +42,7 @@ class ReservationStation {
 
   public:
   // Constructor
-  ReservationStation(Enums::RSClass type, Memory &memory, RegisterFile &registers);
+  ReservationStation(int id, Enums::RSClass type, Memory &memory);
 
   // Methods
   void clear();
@@ -51,6 +52,7 @@ class ReservationStation {
   void start_execution();
   void execute();
   void write_result();  
+  int get_id() const;
   void set_vj(uint16_t v);
   void set_vk(uint16_t v);
   void set_qj(int tag);

@@ -1,10 +1,12 @@
+// Required headers
 #include "core/reservation_station.h"
 #include "core/memory.h"
 #include "core/global.h"
 
 // Constructor
-ReservationStation::ReservationStation(Enums::RSClass type, Memory &memory, RegisterFile &registers) 
-: type(type), memory(memory), registers(registers) {
+ReservationStation::ReservationStation(int id, Enums::RSClass type, Memory &memory) 
+    : id(id), type(type), memory(memory) 
+{
     clear();
 }
 
@@ -38,6 +40,11 @@ bool ReservationStation::is_free() const {
 // Returns whether the operands are ready
 bool ReservationStation::operands_ready() const {
     return qj == Config::FREE_RESERVATION_STATION && qk == Config::FREE_RESERVATION_STATION;
+}
+
+// Returns the unique ID of the reservation station
+int ReservationStation::get_id() const {
+    return id;
 }
 
 // Sets the value of operand j
