@@ -29,7 +29,7 @@ class RegisterFile {
   bool is_ready(int address) const;
   int get_producer(int address) const;
   void set_producer(int address, int station_id);
-  void clear_producer(int address, int station_id);
+  void clear_producer(int address);
 };
 
 #endif // REGISTER_FILE_H

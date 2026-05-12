@@ -42,7 +42,12 @@ bool RegisterFile::is_ready(int address) const {
     throw std::out_of_range("Invalid register address");
 }
 
-
+// Gets the producer tag for the specified register
+int RegisterFile::get_producer(int address) const {
+    if(is_valid_address(address))
+        return producer_tag[address];
+    throw std::out_of_range("Invalid register address");
+}
 
 // Sets the producer tag
 void RegisterFile::set_producer(int address, int stationId) {
@@ -53,9 +58,9 @@ void RegisterFile::set_producer(int address, int stationId) {
 }
 
 // Clears the producer tag (set to -1)
-void RegisterFile::clear_producer(int reg, int station_id) {
-    if(is_valid_address(reg)) {
-        producer_tag[reg] = Config::FREE_RESERVATION_STATION;
-        ready[reg] = true;
+void RegisterFile::clear_producer(int address) {
+    if(is_valid_address(address)) {
+        producer_tag[address] = Config::FREE_RESERVATION_STATION;
+        ready[address] = true;
     }
 }
