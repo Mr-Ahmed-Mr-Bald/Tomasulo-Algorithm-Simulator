@@ -41,12 +41,7 @@ bool RegisterFile::is_ready(int address) const {
     throw std::out_of_range("Invalid register address");
 }
 
-// Returns the producer tag
-int RegisterFile::get_producer(int address) const {
-    if(is_valid_address(address))
-        return producer_tag[address];
-    throw std::out_of_range("Invalid register address");
-}
+
 
 // Sets the producer tag
 void RegisterFile::set_producer(int address, int stationId) {

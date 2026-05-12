@@ -34,6 +34,7 @@ void jumpToAddress(int address)
 
 // Class representing the full state of the simulator
 class SimulatorState {
+  public:
   // Properties
   Program program;
   RegisterFile registers;
@@ -43,7 +44,7 @@ class SimulatorState {
   int pc_index = 0; // next instruction to issue
   bool halted = false;
 
-  public:
+  //public:
   // Constructor
   SimulatorState(const Program& program);
 

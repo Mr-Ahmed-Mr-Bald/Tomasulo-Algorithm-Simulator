@@ -40,7 +40,7 @@ class ReservationStation {
 
   // Methods
   void clear();
-  void allocate(Enums::Opcode op, int instrId, int latency);
+  void allocate(Opcode op, int instrId, int latency);
   bool is_free() const;
   bool operands_ready() const;
   bool canStart_execution() const;

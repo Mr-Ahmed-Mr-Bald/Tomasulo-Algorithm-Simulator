@@ -1,11 +1,13 @@
 #include "../../include/core/station_manager.h"
 
+//creates the number of stations depending on config file
+//first station is empty station
 StationManager::StationManager(){
     int id = 1;
     ReservationStation rsEmpty(0, RSClass(0)); //empty reservation station, to serve as no reservation station available
 
     for(int i = 1; i < 8; i++){ //skip empty reservation station
-        for(int j = 0; j < reservation_station_num[i]; j++){
+        for(int j = 0; j < reservation_station_num[i-1]; j++){
             ReservationStation rs(id, RSClass(i));
             stations.push_back(rs);
             if(j == 0)
@@ -16,6 +18,7 @@ StationManager::StationManager(){
     }
 }
 
+//finds a free station by the given RSClass type
 ReservationStation* StationManager::find_free(RSClass type){
     std::vector<int> indicesList = indices_by_type.at(type);
 
@@ -28,12 +31,14 @@ ReservationStation* StationManager::find_free(RSClass type){
 
 }
 
+//gets the station by the given id
 ReservationStation* StationManager::get_by_id(int id){
     if(id >= 0 && id < stations.size())
         return &stations[id];
     return &stations[0];
 }
 
+//gets all stations by RSClass type
 std::vector<ReservationStation*> StationManager::get_stations_of_type(RSClass type){
     std::vector<ReservationStation*> new_stations;
     std::vector<int> stations_at_location = indices_by_type.at(type);
@@ -43,7 +48,7 @@ std::vector<ReservationStation*> StationManager::get_stations_of_type(RSClass ty
     return new_stations;
 }
 
-//maybe swtich back to const?
+//gets a list of all stations that are ready to write back from stations list
 std::vector<ReservationStation*> StationManager::ready_to_write_back(){
     std::vector<ReservationStation*> new_stations;
     for (int i = 1; i < stations.size(); i++){
