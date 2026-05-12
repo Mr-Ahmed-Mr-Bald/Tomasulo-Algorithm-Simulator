@@ -1,6 +1,7 @@
-#include "../../include/core/stats.h"
+#include "core/stats.h"
 
-void Stat::reset(){
+// Reset all statistics to their initial state
+void Stat::reset() {
     instruction_count = 0;
     completed_instructions = 0;
     branch_count = 0;
@@ -8,26 +9,32 @@ void Stat::reset(){
     cycles_spanned = 0;
 }
 
-void Stat::record_instruction_started(){
+// Record the start of an instruction, incrementing the instruction count
+void Stat::record_instruction_started() {
     instruction_count++;
 }
 
-void Stat::record_instruction_completed(){
+// Record the completion of an instruction, incrementing the completed instructions count
+void Stat::record_instruction_completed() {
     completed_instructions++;
 }
 
-void Stat::record_branch(){
+// Record the occurrence of a branch instruction, incrementing the branch count
+void Stat::record_branch() {
     branch_count++;
 }
 
-void Stat::record_misprediction(){
+// Record a branch misprediction, incrementing the branch mispredictions count
+void Stat::record_misprediction() {
     branch_mispredictions++;
 }
 
-double Stat::ipc() const{
-    return (double)(completed_instructions)/cycles_spanned;
+// Calculate and return the Instructions Per Cycle (IPC) as a double
+double Stat::ipc() const {
+    return (double)(completed_instructions) / cycles_spanned;
 }
 
-double Stat::misprediction_percent() const{
-    return (double)(branch_mispredictions)/branch_count * 100;
+// Calculate and return the branch misprediction percentage as a double
+double Stat::misprediction_percent() const {
+    return (double)(branch_mispredictions) / branch_count * 100;
 }
