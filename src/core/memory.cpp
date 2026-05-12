@@ -1,5 +1,9 @@
 #include "core/memory.h"
 
+void Memory::reset(){
+    std::fill(data.begin(), data.end(), 0);
+}
+
 uint16_t Memory::load(int address){
     if (is_valid_address(address)) 
         return data[address];

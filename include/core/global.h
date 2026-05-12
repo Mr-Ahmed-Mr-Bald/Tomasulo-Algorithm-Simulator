@@ -3,9 +3,10 @@
 
 // Required headers
 #include <cstdint>
+#include "core/config.h"
 
 namespace Global {
-  extern int CDB = CDB_FREE; // Common Data Bus tag of the instruction currently writing back
+  extern int CDB = Config::CDB_FREE; // Common Data Bus tag of the instruction currently writing back
   extern std::uint16_t CDB_value = 0; // Value being written back on the CDB
   extern int halted = false; // Whether the simulator has halted
   extern bool branch_mispredicted = false; // Whether a branch was mispredicted in the current cycle
