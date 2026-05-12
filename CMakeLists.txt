@@ -13,7 +13,8 @@ endif()
 
 # Core
 file(GLOB CORE_SRC src/core/*.cpp)
-add_library(core ${CORE_SRC})
+add_library(core ${CORE_SRC}
+    include/core/global.h)
 target_include_directories(core PUBLIC include)
 
 # IO

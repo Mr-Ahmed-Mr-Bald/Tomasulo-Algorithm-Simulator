@@ -29,13 +29,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 40,
+				"line" : 41,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 42,
+				"line" : 43,
 				"parent" : 0
 			},
 			{
@@ -85,7 +85,7 @@
 	[
 		{
 			"backtrace" : 2,
-			"id" : "core::@6890427a1f51a3e7e1df"
+			"id" : "io::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 2,
@@ -100,11 +100,11 @@
 			"id" : "simulation::@6890427a1f51a3e7e1df"
 		},
 		{
-			"backtrace" : 2,
-			"id" : "io::@6890427a1f51a3e7e1df"
+			"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df"
 		},
 		{
-			"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df"
+			"backtrace" : 2,
+			"id" : "core::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "simulator::@6890427a1f51a3e7e1df",

@@ -1,113 +1,125 @@
 #include "core/reservation_station.h"
 #include "core/memory.h"
+#include "core/global.h"
 
 // Constructor
-ReservationStation::ReservationStation(Enums::RSClass type) : type(type) {
-    started = 0;
-    finished = 0;
+ReservationStation::ReservationStation(Enums::RSClass type, Memory &memory, RegisterFile &registers) 
+: type(type), memory(memory), registers(registers) {
+    clear();
+}
+
+// Clears the reservation station entry
+void ReservationStation::clear() {
+    busy = false;
+    op = Enums::Opcode::LOAD; // default value
+    instruction_id = -1;
+    has_vj = false;
+    has_vk = false;
+    qj = Config::FREE_RESERVATION_STATION;
+    qk = Config::FREE_RESERVATION_STATION;
+    branch = false;
+    started = false;
+    finished = false;
     remaining_cycles = 0;
 }
 
-void ReservationStation::allocate(Enums::Opcode op, int instruction_id, int latency){ 
+// Allocates the reservation station for a new instruction
+void ReservationStation::allocate(Enums::Opcode op, int instruction_id, int latency) { 
     busy = true;
     this->op = op;
     this->instruction_id = instruction_id;
 }
 
-RSClass ReservationStation::station_type() const{
-    return type;
-}
-
-bool ReservationStation::is_free() const{
+// Returns whether the reservation station is free
+bool ReservationStation::is_free() const {
     return !busy;
 }
 
-bool ReservationStation::operands_ready() const{
-    return qj == 0 && qk == 0;
+// Returns whether the operands are ready
+bool ReservationStation::operands_ready() const {
+    return qj == Config::FREE_RESERVATION_STATION && qk == Config::FREE_RESERVATION_STATION;
 }
 
-bool ReservationStation::canStart_execution() const{
-    return operands_ready();
-}
-
-void ReservationStation::set_vj(uint16_t v){
+// Sets the value of operand j
+void ReservationStation::set_vj(uint16_t v) {
     vj = v;
 }
 
-void ReservationStation::set_vk(uint16_t v){
+// Sets the value of operand k
+void ReservationStation::set_vk(uint16_t v) {
     vk = v;
 }
 
-void ReservationStation::set_qj(int tag){
+// Sets the tag of the reservation station producing operand j
+void ReservationStation::set_qj(int tag) {
     qj = tag;
 }
 
-void ReservationStation::set_qk(int tag){
+// Sets the tag of the reservation station producing operand k
+void ReservationStation::set_qk(int tag) {
     qk = tag;
 }
 
-void ReservationStation::setA(int value){
+// Sets the value of the address field A
+void ReservationStation::setA(int value) {
     A = value;
 }
 
-int ReservationStation::get_id() const{
-    return id;
-}
-
-//enum class Opcode { LOAD, STORE, BEQ, CALL, RET, ADD, SUB, AND, MUL };
-//enum class RSClass { Load, Store, Branch, CallRet, AddSub, And, Mul };
-//int reservation_station_num[] = { 2, 2, 2, 1, 4, 2, 1 };
-//int execution_cycles[] = { 8, 8, 1, 1, 2, 1, 8 };
-
-//do all execution in this function, and with every clock just wait till delay is done
-void ReservationStation::start_execution(){
-    if(!canStart_execution()) return;
-
+// Executes the instruction in the reservation station
+void ReservationStation::start_execution() {
+    // Mark started as true
     started = true;
-
-    if(op == Enums::Opcode::LOAD){
-        result = Memory::load(vj);
-        A += vj; //by standard, address is stored in vj
-    }
-
-    else if(op == Opcode::STORE){
-        Memory::store(A+vj, vk); //address, value
-    }
-
-    else if(op == Opcode::BEQ){
-        if(vj == vk);
-            //requires program counter
-    }
-
-    else if(op == Opcode::CALL){
-        //requires program counter
-    }
-
-    else if(op == Opcode::RET){
-        //requires program counter
-    }
-
-    else if(op == Opcode::ADD){
-        result = vj + vk;
-        //where does it store?
-    }
-
-    else if(op == Opcode::SUB){
-        result = vj - vk;
-        //where does it store?
-    }
-    
-    else if(op == Opcode::AND){
-        result = vj & vk;
-        //where does it store?
-    }
-
-    else if(op == Opcode::MUL){
-        result = vj * vk;
-        //where does it store?
-    }
-
-
 }
 
-    
+void ReservationStation::execute() {
+
+    switch(op) {
+        case Enums::Opcode::LOAD:
+            A += vj;
+            result = memory.load(A);
+            break;
+        
+        case Enums::Opcode::STORE:
+            memory.store(A + vj, vk); // address, value
+            break;
+        
+        case Enums::Opcode::BEQ:
+            if (vj == vk) {
+                Global::branch_mispredicted = true;
+            }
+            break;
+        
+        case Enums::Opcode::CALL:
+            Global::unconditional_jump = true;
+            result = A;
+            break;
+        
+        case Enums::Opcode::RET:
+            Global::return_from_call = true;
+            break;
+
+        case Enums::Opcode::ADD:
+            result = vj + vk;
+            break;
+
+        case Enums::Opcode::SUB:
+            result = vj - vk;
+            break;
+        
+        case Enums::Opcode::AND:
+            result = vj & vk;
+            break;
+
+        case Enums::Opcode::MUL:
+            result = vj * vk;
+            break;
+    }
+}
+
+void ReservationStation::write_result() {
+    if (Global::CDB == Config::CDB_FREE) {
+        Global::CDB = instruction_id;
+        Global::CDB_value = result;
+        finished = true;
+    }
+}

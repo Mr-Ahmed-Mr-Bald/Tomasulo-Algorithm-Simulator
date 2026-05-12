@@ -1,13 +1,18 @@
 #ifndef RESERVATION_STATION_H
 #define RESERVATION_STATION_H
+
 // Required headers
 #include "core/enums.h"
+#include "core/memory.h"
+#include "core/register_file.h"
 #include <cstdint>
 #include <string>
 
 // Class representing a reservation station entry
 class ReservationStation {
   // Properties
+  Memory &memory;
+  RegisterFile &registers;
   Enums::RSClass type;
   bool busy;
   Enums::Opcode op;
@@ -36,17 +41,16 @@ class ReservationStation {
 
   public:
   // Constructor
-  ReservationStation(Enums::RSClass type);
+  ReservationStation(Enums::RSClass type, Memory &memory, RegisterFile &registers);
 
   // Methods
   void clear();
-  void allocate(Opcode op, int instrId, int latency);
+  void allocate(Enums::Opcode op, int instruction_id, int latency);
   bool is_free() const;
   bool operands_ready() const;
-  bool canStart_execution() const;
   void start_execution();
-  void tick();
-  bool done() const;
+  void execute();
+  void write_result();  
   void set_vj(uint16_t v);
   void set_vk(uint16_t v);
   void set_qj(int tag);

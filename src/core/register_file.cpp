@@ -1,4 +1,5 @@
 #include "core/register_file.h"
+#include "core/config.h"
 
 // Constructor
 RegisterFile::RegisterFile() {
@@ -10,7 +11,7 @@ void RegisterFile::reset() {
     for (int i = 0; i < Config::NUM_REGS; ++i) {
         value[i] = 0;
         ready[i] = true;
-        producer_tag[i] = -1;
+        producer_tag[i] = Config::FREE_RESERVATION_STATION;
     }
 }
 
@@ -54,7 +55,7 @@ void RegisterFile::set_producer(int address, int stationId) {
 // Clears the producer tag (set to -1)
 void RegisterFile::clear_producer(int reg, int stationId) {
     if(is_valid_address(reg)) {
-        producer_tag[reg] = -1;
+        producer_tag[reg] = Config::FREE_RESERVATION_STATION;
         ready[reg] = true;
     }
 }
