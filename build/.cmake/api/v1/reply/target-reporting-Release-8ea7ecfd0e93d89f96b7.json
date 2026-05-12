@@ -12,7 +12,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "Release/io.lib"
+			"path" : "Release/reporting.lib"
 		}
 	],
 	"backtrace" : 1,
@@ -36,7 +36,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 21,
+				"line" : 32,
 				"parent" : 0
 			},
 			{
@@ -48,7 +48,7 @@
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 22,
+				"line" : 33,
 				"parent" : 0
 			}
 		]
@@ -84,8 +84,7 @@
 			},
 			"sourceIndexes" : 
 			[
-				0,
-				1
+				0
 			]
 		}
 	],
@@ -95,9 +94,9 @@
 			"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df"
 		}
 	],
-	"id" : "io::@6890427a1f51a3e7e1df",
-	"name" : "io",
-	"nameOnDisk" : "io.lib",
+	"id" : "reporting::@6890427a1f51a3e7e1df",
+	"name" : "reporting",
+	"nameOnDisk" : "reporting.lib",
 	"paths" : 
 	{
 		"build" : ".",
@@ -109,8 +108,7 @@
 			"name" : "Source Files",
 			"sourceIndexes" : 
 			[
-				0,
-				1
+				0
 			]
 		}
 	],
@@ -119,13 +117,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/io/file_loader.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "src/io/input_manager.cpp",
+			"path" : "src/reporting/report_generator.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

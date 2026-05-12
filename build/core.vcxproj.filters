@@ -33,9 +33,17 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="D:\AUC\Semester Five\Computer Architecture\Project II\include\core\global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
     <CustomBuild Include="D:\AUC\Semester Five\Computer Architecture\Project II\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{4CB0024F-CD07-3C75-BEF1-C64E3154E5E6}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files">
       <UniqueIdentifier>{2CD0FABB-6901-35C0-B3C5-0C58DF4C7DC3}</UniqueIdentifier>
     </Filter>

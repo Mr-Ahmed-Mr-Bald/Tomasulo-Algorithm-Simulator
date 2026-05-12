@@ -18,6 +18,7 @@ class Memory {
   Memory() : data(Config::MEM_SIZE) {}
 
   // Methods
+  void reset();
   uint16_t load(int address);
   void store(int address, uint16_t value);
   void preload(int address, uint16_t value);

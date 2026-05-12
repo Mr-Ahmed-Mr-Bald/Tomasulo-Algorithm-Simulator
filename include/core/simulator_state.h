@@ -42,7 +42,6 @@ class SimulatorState {
   StationManager stations;
   int cycle = 0;
   int pc_index = 0; // next instruction to issue
-  bool halted = false;
 
   //public:
   // Constructor

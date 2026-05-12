@@ -12,7 +12,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "RelWithDebInfo/io.lib"
+			"path" : "Debug/parser.lib"
 		}
 	],
 	"backtrace" : 1,
@@ -36,7 +36,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 21,
+				"line" : 27,
 				"parent" : 0
 			},
 			{
@@ -48,7 +48,7 @@
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 22,
+				"line" : 28,
 				"parent" : 0
 			}
 		]
@@ -59,7 +59,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "/DWIN32 /D_WINDOWS /GR /EHsc /Zi /O2 /Ob1 /DNDEBUG -std:c++17 -MD"
+					"fragment" : "/DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd"
 				},
 				{
 					"backtrace" : 2,
@@ -84,8 +84,7 @@
 			},
 			"sourceIndexes" : 
 			[
-				0,
-				1
+				0
 			]
 		}
 	],
@@ -95,9 +94,9 @@
 			"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df"
 		}
 	],
-	"id" : "io::@6890427a1f51a3e7e1df",
-	"name" : "io",
-	"nameOnDisk" : "io.lib",
+	"id" : "parser::@6890427a1f51a3e7e1df",
+	"name" : "parser",
+	"nameOnDisk" : "parser.lib",
 	"paths" : 
 	{
 		"build" : ".",
@@ -109,8 +108,7 @@
 			"name" : "Source Files",
 			"sourceIndexes" : 
 			[
-				0,
-				1
+				0
 			]
 		}
 	],
@@ -119,13 +117,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/io/file_loader.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "src/io/input_manager.cpp",
+			"path" : "src/parser/parser.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],
